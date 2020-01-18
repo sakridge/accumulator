@@ -30,7 +30,7 @@ lazy_static! {
 #[allow(clippy::module_name_repetitions)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 /// An RSA 2048 group element, directly wrapping a GMP integer from the `rug` crate.
-pub struct Rsa2048Elem(Integer);
+pub struct Rsa2048Elem(pub Integer);
 
 impl TypeRep for Rsa2048 {
   type Rep = Integer;

@@ -34,7 +34,7 @@ pub enum AccError {
 /// representing the type `T` being hashed-to-prime and accumulated.
 pub struct Accumulator<G: UnknownOrderGroup, T> {
   phantom: PhantomData<T>,
-  value: G::Elem,
+  pub value: G::Elem,
 }
 
 // Manual clone impl required because Rust's type inference is not good. See
