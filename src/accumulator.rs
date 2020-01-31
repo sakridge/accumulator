@@ -72,6 +72,14 @@ pub struct NonmembershipProof<G: UnknownOrderGroup, T> {
 }
 
 impl<G: UnknownOrderGroup, T: Eq + Hash> Accumulator<G, T> {
+  /// Create an accumulator from a given one
+  pub fn new_from(new: G::Elem) -> Self {
+    Self {
+      phantom: PhantomData,
+      value: new,
+    }
+  }
+
   /// Returns a new, empty accumulator.
   pub fn empty() -> Self {
     Self {
@@ -549,5 +557,13 @@ mod tests {
   fn test_compute_individual_witnesses_rsa2048() {
     // Class version takes too long for a unit test.
     test_compute_individual_witnesses::<Rsa2048>();
+  }
+
+  #[test]
+  fn test_from() {
+    let acc = new_acc::<Rsa2048, &'static str>(&["a", "b", "c"]);
+    let value = acc.value.clone();
+    let new = Accumulator::new_from(value);
+    assert_eq!(new, acc);
   }
 }
